@@ -1,0 +1,304 @@
+@import '../../css/config/index.scss';
+
+.media-list-wrapper {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: calc(var(--item-width, var(--default-item-width)) * var(--max-row-items, var(--default-max-row-items)));
+
+  &.items-list-hor,
+  &.items-list-ver {
+    padding: 0 16px;
+
+    @media (min-width: 710px) {
+      padding: 0 24px;
+    }
+
+    .media-list-row {
+      .sliding-sidebar & {
+        transition-property: width;
+        transition-duration: 0.2s;
+      }
+    }
+  }
+
+  &.items-list-hor {
+    .media-list-row {
+      max-width: 100%;
+    }
+  }
+
+  &.items-list-ver {
+    .media-list-row {
+      max-width: var(--max-item-width, var(--default-max-item-width));
+    }
+  }
+}
+
+.media-list-row {
+  position: relative;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  min-height: 136px;
+  will-change: width;
+
+  + .media-list-row {
+    border-width: 1px 0 0;
+    border-style: solid;
+    border-color: var(--media-list-row-border-color);
+  }
+
+  .spinner-loader {
+    margin: 3.5rem auto 0;
+  }
+}
+
+.visible-sidebar .media-list-wrapper.items-list-ver {
+  padding: 0 16px;
+
+  @media (min-width: 710px) {
+    padding: 0 24px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0;
+  }
+}
+
+@media (min-width: 400px) {
+  .media-list-wrapper.items-list-hor .media-list-row {
+    max-width: calc(var(--item-width, var(--default-item-width)) * var(--max-row-items, var(--default-max-row-items)));
+  }
+}
+
+$item-width: 218px;
+$side-empty-space: 40px;
+
+@media (min-width: (2 * $side-empty-space + 2 * $item-width)) {
+  .media-list-wrapper.items-list-ver {
+    padding: 0;
+
+    .media-list-row {
+      max-width: 100%;
+      width: calc(2 * var(--item-width, var(--default-item-width)));
+    }
+  }
+}
+
+@media (min-width: (2 * $side-empty-space + 3 * $item-width)) {
+  .media-list-wrapper.items-list-ver .media-list-row {
+    width: calc(3 * var(--item-width, var(--default-item-width)));
+  }
+}
+
+@media (min-width: (2 * $side-empty-space + 4 * $item-width)) {
+  .media-list-wrapper.items-list-ver .media-list-row {
+    width: calc(4 * var(--item-width, var(--default-item-width)));
+  }
+}
+
+// Additional media queries for 5 to 10 items
+@for $i from 5 through 10 {
+  @media (min-width: (2 * $side-empty-space + $i * $item-width)) {
+    .media-list-wrapper.items-list-ver .media-list-row {
+      width: calc(#{$i} * var(--item-width, var(--default-item-width)));
+    }
+  }
+}
+
+@media (min-width: 401px) and (max-width: 599px) {
+  .media-list-wrapper.items-list-ver .media-list-row {
+    width: var(--max-item-width, var(--default-max-item-width));
+  }
+}
+
+@media (min-width: (2 * $side-empty-space + 3 * $item-width)) and (min-width: 768px) {
+  .visible-sidebar .media-list-wrapper.items-list-ver .media-list-row {
+    width: calc(2 * var(--item-width, var(--default-item-width)));
+  }
+}
+
+// Additional media queries for visible sidebar with 4 to 10 items
+@for $i from 4 through 10 {
+  @media (min-width: (2 * $side-empty-space + $i * $item-width)) and (min-width: 768px) {
+    .visible-sidebar .media-list-wrapper.items-list-ver .media-list-row {
+      width: calc(#{$i - 1} * var(--item-width, var(--default-item-width)));
+    }
+  }
+}
+
+.media-list-wrapper .media-filters-row {
+  position: relative;
+  display: block;
+  margin: 16px 0;
+
+  @media (min-width: 600px) {
+    padding-right: 4px;
+  }
+}
+
+.media-list-wrapper .media-list-header + .media-filters-row {
+  margin-top: -12px;
+}
+
+.media-filters-row + .media-list-header {
+  padding-top: 0;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.media-list-header {
+  display: block;
+  padding: 12px 0;
+  text-align: right; // Aligns content to the right
+
+  hh2,
+  h3 {
+    display: inline-block;
+    margin: 12px 0;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 14px;
+
+    a {
+      margin: 10px 16px;
+      text-decoration: none;
+      color: var(--media-list-header-title-link-text-color);
+    }
+  }
+
+  .view-all-container {
+    margin-right: auto;
+
+    a {
+      text-decoration: none;
+      color: var(--link-color, #000);
+    }
+  }
+}
+
+.media-filters-row-inner {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  .media-type-filters,
+  .media-filters-sort {
+    position: relative;
+    display: inline-block;
+
+    button {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      border: 0;
+      background: none;
+      color: var(--header-circle-button-color);
+
+      > * {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        pointer-events: none;
+      }
+
+      &:focus,
+      &:active {
+        color: inherit;
+      }
+
+      .dark_theme & {
+        color: inherit;
+
+        &:focus,
+        &:active {
+          color: var(--header-circle-button-color);
+        }
+      }
+    }
+  }
+
+  .popup-trigger {
+    .filter-button-label {
+      font-weight: 500;
+    }
+
+    .material-icons {
+      margin-top: -1px;
+    }
+  }
+
+  .popup {
+    position: absolute;
+    top: 100%;
+    width: 180px;
+  }
+
+  .media-type-filters {
+    margin-right: 8px;
+
+    .popup-trigger {
+      .filter-button-label {
+        font-size: 16px;
+      }
+    }
+
+    .popup {
+      left: 0;
+    }
+  }
+
+  .media-filters-sort {
+    float: right;
+    clear: right;
+
+    .popup-trigger {
+      .filter-button-label {
+        font-size: 14px;
+        letter-spacing: 0.007px;
+      }
+
+      .material-icons {
+        margin-right: 8px;
+      }
+    }
+
+    .popup {
+      right: 0;
+    }
+  }
+}
+
+.media-filter .media-filter-option-list {
+  width: 100%;
+  padding: 8px 0;
+
+  .media-filter-option {
+    button {
+      width: 100%;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: initial;
+      height: 48px;
+      line-height: 48px;
+      color: inherit;
+
+      &:hover,
+      &.active {
+        background-color: var(--in-popup-nav-menu-item-hover-bg-color);
+      }
+    }
+  }
+}
