@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #0f0f0f;
+  color: #f1f1f1;
+  font-family: "Segoe UI", "Noto Sans Arabic", "Tahoma", Arial, sans-serif;
+}
+
+/* thin scrollbars for horizontal rows */
+.no-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
