@@ -1,0 +1,8 @@
+# Bina platform — local run (Step 1: web frontend only).
+# Later steps will add: api, postgres, redis, etc.
+services:
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
